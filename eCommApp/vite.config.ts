@@ -20,10 +20,19 @@ export default defineConfig({
     css: true,
     coverage: {
       provider: 'v8',
+      all: true,
+      include: ['src/**/*.{ts,tsx}'],
       reporter: ['text', 'json', 'html'],
+      thresholds: {
+        statements: 80,
+        branches: 80,
+        functions: 80,
+        lines: 80
+      },
       exclude: [
         'node_modules/',
         'src/test/',
+        '**/*.test.{ts,tsx}',
         '**/*.d.ts',
         '**/*.config.*',
         'dist/',
