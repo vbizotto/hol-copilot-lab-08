@@ -2,31 +2,28 @@
 
 A modern TypeScript-based shopping website built with React and Vite.
 
+For a developer-focused setup and project overview, see the [Quick Start Guide](./QUICK_START.md).
+
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js (version 18 or higher)
-- npm or yarn
+- Node.js `^20.19.0` or `>=22.12.0` (required by the installed Vite version)
+- npm
 
 ### Installation
 
-1. Navigate to the eCommApp directory:
+1. Install dependencies from the `eCommApp` directory:
    ```bash
-   cd eCommApp
+   npm ci
    ```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
+2. Start the development server:
    ```bash
    npm run dev
    ```
 
-4. Open your browser and visit `http://localhost:3000`
+3. Open your browser and visit `http://localhost:3000`
 
 ## 📁 Project Structure
 
