@@ -20,7 +20,7 @@ const ReviewModal = ({ product, onClose, onSubmit }: ReviewModalProps) => {
     return (
         <div className="modal-backdrop" onClick={onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
-                <h2>Reviews for {product.name}</h2>
+                <h2>Avaliações de {product.name}</h2>
                 <div className="reviews-list">
                     {product.reviews.length > 0 ? (
                         product.reviews.map((review, index) => (
@@ -30,16 +30,16 @@ const ReviewModal = ({ product, onClose, onSubmit }: ReviewModalProps) => {
                             </div>
                         ))
                     ) : (
-                        <p>No reviews yet.</p>
+                        <p>Ainda não há avaliações.</p>
                     )}
                 </div>
                 <form onSubmit={handleSubmit} className="review-form">
-                    <h3>Leave a Review</h3>
-                    <input type="text" name="author" placeholder="Your name" required />
-                    <textarea name="comment" placeholder="Your review" required />
-                    <button type="submit">Submit</button>
+                    <h3>Deixe uma avaliação</h3>
+                    <input type="text" name="author" placeholder="Seu nome" required />
+                    <textarea name="comment" placeholder="Sua avaliação" required />
+                    <button type="submit">Enviar</button>
                 </form>
-                <button onClick={onClose} className="close-button">Close</button>
+                <button onClick={onClose} className="close-button">Fechar</button>
             </div>
         </div>
     );

@@ -62,7 +62,8 @@ const renderProductsPage = (addToCart = vi.fn()) => render(
 );
 
 describe('ProductsPage', () => {
-    it('throws a clear error when rendered without the cart provider', () => {
+    // Verifica se a página informa claramente quando é renderizada sem o provedor do carrinho.
+    it('lança um erro claro quando renderizada sem o provedor do carrinho', () => {
         const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
 
         try {
@@ -70,47 +71,49 @@ describe('ProductsPage', () => {
                 <MemoryRouter>
                     <ProductsPage />
                 </MemoryRouter>
-            )).toThrow('CartContext must be used within a CartProvider');
+            )).toThrow('CartContext deve ser usado dentro de um CartProvider');
         } finally {
             consoleError.mockRestore();
         }
     });
 
-    it('loads products, reflects stock status, adds available items, and accepts a review', async () => {
+    // Verifica carregamento do catálogo, estado do estoque, inclusão no carrinho e envio de avaliação.
+    it('carrega os produtos, informa o estoque, adiciona itens disponíveis e aceita uma avaliação', async () => {
         mockProductFetch();
         const addToCart = vi.fn();
         renderProductsPage(addToCart);
 
-        expect(screen.getByText('Loading products...')).toBeInTheDocument();
-        expect(await screen.findByRole('heading', { name: 'Our Products' })).toBeInTheDocument();
+        expect(screen.getByText('Carregando produtos...')).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: 'Nossos produtos' })).toBeInTheDocument();
         expect(screen.getByText('A crisp snack')).toBeInTheDocument();
         expect(screen.getByRole('img', { name: 'Apple' })).toHaveAttribute(
             'src',
             'products/productImages/apple.png'
         );
-        expect(screen.getByRole('button', { name: 'Out of Stock' })).toBeDisabled();
+        expect(screen.getByRole('button', { name: 'Fora de estoque' })).toBeDisabled();
 
-        fireEvent.click(screen.getAllByRole('button', { name: 'Add to Cart' })[0]);
+        fireEvent.click(screen.getAllByRole('button', { name: 'Adicionar ao carrinho' })[0]);
         expect(addToCart).toHaveBeenCalledWith(products[0]);
 
         fireEvent.click(screen.getByRole('img', { name: 'Apple' }));
-        expect(screen.getByRole('heading', { name: 'Reviews for Apple' })).toBeInTheDocument();
-        expect(screen.getByText('No reviews yet.')).toBeInTheDocument();
-        fireEvent.change(screen.getByPlaceholderText('Your name'), {
+        expect(screen.getByRole('heading', { name: 'Avaliações de Apple' })).toBeInTheDocument();
+        expect(screen.getByText('Ainda não há avaliações.')).toBeInTheDocument();
+        fireEvent.change(screen.getByPlaceholderText('Seu nome'), {
             target: { value: 'Casey' },
         });
-        fireEvent.change(screen.getByPlaceholderText('Your review'), {
+        fireEvent.change(screen.getByPlaceholderText('Sua avaliação'), {
             target: { value: 'Delicious' },
         });
-        fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Enviar' }));
 
         expect(screen.getByText('Casey')).toBeInTheDocument();
         expect(screen.getByText('Delicious')).toBeInTheDocument();
-        fireEvent.click(screen.getByRole('button', { name: 'Close' }));
-        expect(screen.queryByRole('heading', { name: 'Reviews for Apple' })).not.toBeInTheDocument();
+        fireEvent.click(screen.getByRole('button', { name: 'Fechar' }));
+        expect(screen.queryByRole('heading', { name: 'Avaliações de Apple' })).not.toBeInTheDocument();
     }, 15000);
 
-    it('logs a product loading error and stops showing the loading state', async () => {
+    // Verifica se um erro de rede é registrado e se a página encerra o estado de carregamento.
+    it('registra um erro ao carregar produtos e encerra o estado de carregamento', async () => {
         const error = new Error('Network unavailable');
         vi.spyOn(globalThis, 'fetch').mockRejectedValue(error);
         const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
@@ -118,16 +121,17 @@ describe('ProductsPage', () => {
         renderProductsPage();
 
         await waitFor(() => {
-            expect(screen.queryByText('Loading products...')).not.toBeInTheDocument();
+            expect(screen.queryByText('Carregando produtos...')).not.toBeInTheDocument();
         });
 
-        expect(consoleError).toHaveBeenCalledWith('Error loading products:', error);
-        expect(screen.getByRole('heading', { name: 'Our Products' })).toBeInTheDocument();
+        expect(consoleError).toHaveBeenCalledWith('Erro ao carregar produtos:', error);
+        expect(screen.getByRole('heading', { name: 'Nossos produtos' })).toBeInTheDocument();
         expect(screen.queryByText('Apple')).not.toBeInTheDocument();
         consoleError.mockRestore();
     });
 
-    it('logs a failed response instead of displaying an incomplete catalog', async () => {
+    // Verifica se uma resposta HTTP malsucedida é registrada e não exibe produtos incompletos.
+    it('registra uma resposta malsucedida sem exibir um catálogo incompleto', async () => {
         vi.spyOn(globalThis, 'fetch').mockResolvedValue(
             new Response('', { status: 503, statusText: 'Service Unavailable' })
         );
@@ -136,14 +140,14 @@ describe('ProductsPage', () => {
         renderProductsPage();
 
         await waitFor(() => {
-            expect(screen.queryByText('Loading products...')).not.toBeInTheDocument();
+            expect(screen.queryByText('Carregando produtos...')).not.toBeInTheDocument();
         });
 
         expect(consoleError).toHaveBeenCalledWith(
-            'Error loading products:',
-            new Error('Failed to load apple.json')
+            'Erro ao carregar produtos:',
+            new Error('Falha ao carregar apple.json')
         );
-        expect(screen.queryByRole('button', { name: 'Add to Cart' })).not.toBeInTheDocument();
+        expect(screen.queryByRole('button', { name: 'Adicionar ao carrinho' })).not.toBeInTheDocument();
         consoleError.mockRestore();
     });
 });

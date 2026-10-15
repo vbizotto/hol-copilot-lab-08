@@ -12,7 +12,7 @@ const ProductsPage = () => {
     const cartContext = useContext(CartContext);
 
     if (!cartContext) {
-        throw new Error('CartContext must be used within a CartProvider');
+        throw new Error('CartContext deve ser usado dentro de um CartProvider');
     }
 
     const { addToCart } = cartContext;
@@ -28,13 +28,13 @@ const ProductsPage = () => {
                 ];
                 const productPromises = productFiles.map(async (file) => {
                     const response = await fetch(`products/${file}`);
-                    if (!response.ok) throw new Error(`Failed to load ${file}`);
+                    if (!response.ok) throw new Error(`Falha ao carregar ${file}`);
                     return await response.json();
                 });
                 const loadedProducts = await Promise.all(productPromises);
                 setProducts(loadedProducts);
             } catch (error) {
-                console.error('Error loading products:', error);
+                console.error('Erro ao carregar produtos:', error);
             } finally {
                 setLoading(false);
             }
@@ -61,7 +61,7 @@ const ProductsPage = () => {
             <div className="app">
                 <Header />
                 <main className="main-content">
-                    <div className="loading">Loading products...</div>
+                    <div className="loading">Carregando produtos...</div>
                 </main>
                 <Footer />
             </div>
@@ -73,7 +73,7 @@ const ProductsPage = () => {
             <Header />
             <main className="main-content">
                 <div className="products-container">
-                    <h2>Our Products</h2>
+                    <h2>Nossos produtos</h2>
                     <div className="products-grid">
                         {products.map((product) => (
                             <div key={product.id || product.name} className="product-card">
@@ -96,7 +96,7 @@ const ProductsPage = () => {
                                         className={`add-to-cart-btn ${product.inStock ? '' : 'disabled'}`}
                                         disabled={!product.inStock}
                                     >
-                                        {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                                        {product.inStock ? 'Adicionar ao carrinho' : 'Fora de estoque'}
                                     </button>
                                 </div>
                             </div>

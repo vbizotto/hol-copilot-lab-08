@@ -17,8 +17,9 @@ const product: Product = {
     inStock: true,
 };
 
-describe('ReviewModal', () => {
-    it('renders nothing when no product is selected', () => {
+describe('Modal de avaliações', () => {
+    // Verifica que o modal não é exibido quando nenhum produto está selecionado.
+    it('não renderiza conteúdo quando nenhum produto está selecionado', () => {
         const { container } = render(
             <ReviewModal product={null} onClose={vi.fn()} onSubmit={vi.fn()} />
         );
@@ -26,24 +27,25 @@ describe('ReviewModal', () => {
         expect(container).toBeEmptyDOMElement();
     });
 
-    it('shows existing reviews and submits a new review with an ISO date', () => {
+    // Verifica a exibição de avaliações existentes, o envio de uma nova avaliação e a limpeza do formulário.
+    it('exibe avaliações existentes e envia uma nova avaliação com data ISO', () => {
         const onSubmit = vi.fn<(review: Review) => void>();
 
         render(
             <ReviewModal product={product} onClose={vi.fn()} onSubmit={onSubmit} />
         );
 
-        expect(screen.getByRole('heading', { name: 'Reviews for Apple' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'Avaliações de Apple' })).toBeInTheDocument();
         expect(screen.getByText('Taylor')).toBeInTheDocument();
         expect(screen.getByText('Fresh and crisp')).toBeInTheDocument();
 
-        fireEvent.change(screen.getByPlaceholderText('Your name'), {
+        fireEvent.change(screen.getByPlaceholderText('Seu nome'), {
             target: { value: 'Jordan' },
         });
-        fireEvent.change(screen.getByPlaceholderText('Your review'), {
+        fireEvent.change(screen.getByPlaceholderText('Sua avaliação'), {
             target: { value: 'Great taste' },
         });
-        fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Enviar' }));
 
         expect(onSubmit).toHaveBeenCalledOnce();
         const submittedReview = onSubmit.mock.calls[0][0];
@@ -52,11 +54,12 @@ describe('ReviewModal', () => {
             comment: 'Great taste',
         });
         expect(Number.isNaN(Date.parse(submittedReview.date))).toBe(false);
-        expect(screen.getByPlaceholderText('Your name')).toHaveValue('');
-        expect(screen.getByPlaceholderText('Your review')).toHaveValue('');
+        expect(screen.getByPlaceholderText('Seu nome')).toHaveValue('');
+        expect(screen.getByPlaceholderText('Sua avaliação')).toHaveValue('');
     });
 
-    it('shows the empty state and closes only when the backdrop or close button is clicked', () => {
+    // Verifica o estado sem avaliações e que o modal fecha pelo fundo ou pelo botão de fechar.
+    it('exibe o estado sem avaliações e fecha ao clicar no fundo ou no botão de fechar', () => {
         const onClose = vi.fn();
         const { container } = render(
             <ReviewModal
@@ -66,8 +69,8 @@ describe('ReviewModal', () => {
             />
         );
 
-        expect(screen.getByText('No reviews yet.')).toBeInTheDocument();
-        fireEvent.click(screen.getByRole('heading', { name: 'Reviews for Apple' }));
+        expect(screen.getByText('Ainda não há avaliações.')).toBeInTheDocument();
+        fireEvent.click(screen.getByRole('heading', { name: 'Avaliações de Apple' }));
         expect(onClose).not.toHaveBeenCalled();
 
         const backdrop = container.querySelector('.modal-backdrop');
@@ -77,7 +80,7 @@ describe('ReviewModal', () => {
         }
         expect(onClose).toHaveBeenCalledOnce();
 
-        fireEvent.click(screen.getByRole('button', { name: 'Close' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Fechar' }));
         expect(onClose).toHaveBeenCalledTimes(2);
     });
 });
