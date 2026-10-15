@@ -1,0 +1,221 @@
+
+-LAB1 - Overview and setup
+-LAB2 - Exploring the codebase with Github Copilot
+
+Utilização da IA
+        - Temos 3 tipos de definições de IA's
+                . ASK: Perguntas, é de execução mais rápida e consome menos tokens, menos custos.
+                . PLAN: Planejar antes de executar, fornece um plano de execução e posteriormente pede
+                autorização para execução.
+                . AGENT: Faz análise, planeja e automaticamente já executa.            
+
+Logo, ao iniciar um novo projeto é recomendável a utilização do ASK.
+Existem técnicas de contextos que melhoram as execuções e custos.
+
+No VS_CODE é possível você escolher entre os vários modelos de IA e isso impacta em custos.
+
+Reposta às perguntas: 
+ - How do I build this project? What are the build commands?
+	cd eCommApp
+	npm install
+	npm run build
+	
+ - What do I need to install or set up before I can run this project locally?
+
+ - Quais as principais funcionalidades deste projeto ? Pode me apresentar em alto nível ?	
+
+	Em alto nível, o projeto é uma loja virtual demonstrativa chamada The Daily Harvest, construída com React e TypeScript. Ela reúne estas funcionalidades:
+
+	Loja e catálogo: página inicial e listagem de produtos, com preço, descrição e disponibilidade em estoque.
+	Avaliações: permite abrir uma avaliação de produto e adicioná-la à listagem durante a sessão.
+	Carrinho e checkout: adicionar produtos ao carrinho, acumular quantidades e simular a confirmação de um pedido.
+	Acesso administrativo: tela de login e uma página administrativa com uma opção para ativar ou encerrar uma promoção.
+	Navegação: páginas separadas para início, produtos, login, administração e carrinho.
+	O fluxo principal é: ver produtos → adicionar ao carrinho → confirmar o checkout. As telas e rotas estão reunidas em App.tsx.
+
+	Observação: pelo código, trata-se de um protótipo didático: não há integração visível com um backend. 
+	            O login usa credenciais fixas no próprio código, e checkout, avaliações e promoção são simulações; por exemplo, a promoção exibida na página administrativa 
+				não parece alterar os preços do catálogo.
+				
+- LAB3 - Writing unit tests with Github Copilot Edit modelos
+
+        - Na edição do código no VS-CODE, podemos utilizar o CTRL+I para abrir uma janela do assitente
+          de código da IA dentro do texto editado.
+        - De forma similar quando estamos editando um código (Ex.: CartPage.test.tsx),
+          no Chat da IA, na caixa de diálogo podemos verificar que ela já assume o 
+          arquivo editado como contexto.
+        - Também podemos forçar esse contexto digitando @CartPage.test.tsx.
+        - Também podemos selecionar o arquivo de contexto clicando no ícone +
+          da caixa de diálogo do Chat da IA.
+        - Na caixa de diálogo do chat da IA informar: 
+          . Selecionar o tipo de assistente de IA como ASK.
+          . Por favor crie os testes unitários para o arquivo informado no arquivo do contexto.
+          . A IA irá gerar o código de testes de cobertura, você poderá copiar este código
+            e inserir manualmente, não é muito aconselhável porque a IA gera somente aquilo que
+            não está contemplado no texto original, pode ocorrer perda de código.
+            O ideal será clicar no ícone na parte superior da caixa da diálogo "Apply in editor"
+            ícone "folha em branco +".
+            Após isso você deverá informar o arquivo de teste que será alterado.
+
+        Importante: Quando usamos o tipo de IA como ASK, ela gera textos desanexados de
+                    nossos projetos e a anexação devemos realizar manualmente.
+
+        Aplicando as melhores práticas em testes:
+        @workspace Esses testes seguem as melhores práticas de teste? 
+         Verifique os itens a seguir e sugira melhorias, se necessário.
+        - Nomes de teste claros e descritivos 
+        - Responsabilidade única por teste 
+        - Estrutura clara de organização-ação-asserção 
+        - Asserção única por teste (quando apropriado) 
+        - Uso apropriado de mocks/stubs 
+        - Mensagens de erro adequadas 
+        - Configuração adequada dos dados de teste 
+        - Tratamento de erros apropriado 
+        - Considerações sobre desempenho 
+        - Estrutura de teste de fácil manutenção                
+
+Alterando o modo da IA para Agent
+=================================
+LAB4 - Modo Agente do GitHub Copilot: Desenvolvimento Orientado a Objetivos
+
+        - No Chat da IA do Copilot alterar o modo da IA para Agente.
+        - Inserir as seguintes diretivas:
+                . Preciso da sua ajuda para atingir 80% de cobertura de código no projeto The Daily Harvest. 
+                . Por favor: 
+                        1. Analise a cobertura de testes atual em todos os arquivos. 
+                        2. Identifique os componentes, funções e módulos que não possuem testes adequados. 
+                        3. Gere testes unitários abrangentes para os trechos de código não cobertos.
+                        4. Certifique-se de que todos os novos testes sigam os padrões e convenções de teste existentes. 
+                        5. Garanta que todos os testes sejam aprovados e realmente melhorem a cobertura. 
+                        6. Continue trabalhando até atingirmos pelo menos 80% de cobertura geral. 
+                Trabalhe de forma autônoma e me informe sobre seu progresso. 
+                Concentre-se primeiro na lógica de negócios, funções utilitárias e componentes React.
+                
+                Importante: Em fase de desenvolvimento de projeto o ideal é que façamos essas
+                            alterações em blocos menores de código, para a IA não alucinar. 
+
+LAB5 - Liberte suas mãos com o Agent Coding
+
+  A ideia central seria ter a IA como um desenvolvedor trabalhando na equipe.
+
+  Instrução para testes: 
+    História de usuário (User story)
+      - Um usuário deve ser capaz de clicar em um botão "Fale Conosco", exibindo um formulário, onde o usuário possa inserir, seu nome,
+        e-mail e uma solicitação.
+        Abaixo da solicitação, o usuário deve ser capaz de pressionar "Enviar"
+        Quando o usuário clicar em enviar, um pop-up exibirá a mensagem: "Obrigado por sua mensagem", junto com um botão "Continuar" e os
+        dados no formulário de envio serão limpos.
+
+  - Após a definição da tarefa acima, executar os seguintes passos:
+    . Abrir o Github
+    . Clicar no item de menu Issues/Problemas
+    . Clicar no botão New issue
+    . Atribuir um título para a nova funcionalidade/correção
+    . Copiar a história de usuário definida acima
+    . Clicar no botão Create Issues
+    . Será apresentada uma nova tela com uma série de opções do lado direito
+    . Na opção Assignees, clicar no botão "Assign to Agent" (Observação: Nas versões free do Github, normalmente não existe esta opção)
+    . Será exibida uma nova tela, onde você poderá adicionar um contexto para o agente de IA.
+    . No canto inferior direito dessa tela você poderá selecionar a IA que irá executar os trabalhos, automaticamente é sugerido o Copilot
+    . Clicar no botão "Assign"
+    . Depois que fizer isso, é exibida uma nova tela com o resumo da instrução e um ícone com dois olhos, indicando que a IA iniciou
+      os trabalhos.
+    . Clicar no item de menu do Github, Actions
+    . Será exibida uma nova tela de monstrando a execução do Agent de IA.
+
+  - Enquanto o agente de IA resolve o problema, voltamos para nosso projeto no VS-CODE.
+    . Executar o projeto em localhost.
+      npm run dev
+      http://localhost:3000
+    . Podemos verificar que o botão fale conosco não aparece na aplicação.
+
+  - Voltando ao Github, terminadas as alterações pelo agente de IA, verificamos
+    que o mesmo gerou um Pull Request com as alterações realizadas e uma breve
+    documentação do que foi realizado.
+  - Gerou uma nova branch
+  - Essa nova branch pode ser verificada retornando ao gitbash do terminal do
+    VS-CODE
+  - Comando git checkout <nome da branch criada> esse comando posiciona as 
+    ações dentro da branch.
+  - Executar npm install
+
+LAB6 - Estendento o GitHub Copilot com o MCP(Model Context Protocolo)
+
+  O MCP é responsável por conectar sua IDE e fazer a mediação de sua base de código
+  e expandir o conhecimento do GitHub Copilot.
+  Exemplos:
+    .Armazenamento de dados : Arquivos e bancos de dados
+    .Ferramentas de comunicação : Slack
+    .Plataformas de design : Figma
+    .Gestão de projetos : Jira ou Azure DevOps
+    .Provedores de nuvem : Azure
+
+  Ao utilizar servidores MCP, existem duas maneiras principais de conectar 
+  seu cliente GitHub Copilot: através do Registro MCP e através da configuração
+  manual.  
+
+  Para armazenar a configuração no nível do repositório, crie um 
+  .vscode/mcp.jsonarquivo.
+  Para armazenar a configuração do seu dispositivo local em diferentes espaços 
+  de trabalho, adicione a configuração ao seu settings.jsonarquivo no 
+  Visual Studio Code.
+  Dentro do arquivo escolhido, você adicionará uma configuração semelhante a 
+  este modelo abaixo...
+
+    {
+      "inputs": [
+        // The "inputs" section defines the inputs required for the MCP server configuration.
+        {
+          "type": "promptString"
+        }
+      ],
+      "servers": {
+        // The "servers" section defines the MCP servers you want to use.
+        "fetch": {
+          "command": "uvx",
+          "args": ["mcp-server-fetch"]
+        }
+      }
+    }
+
+  Ao encontrar e consultar a documentação do seu servidor MCP de terceiros, 
+  você poderá obter qualquer informação adicional que seja necessária para essa 
+  configuração específica. 
+  A comunidade mantém uma lista de servidores MCP comuns em 
+  https://github.com/modelcontextprotocol/servers.
+
+  A maneira mais fácil seria através da utilização das extensões do VS-CODE.
+
+LAB7 - Utilizando Instruções Personalizadas para adaptar o comportamento do Copilot
+
+  Para não ficarmos repetindo instruções nas solicitações para IA, podemos criar
+  um arquivo com todas instruções necessárias.
+  Criar uma arquivo com o nome copilot-instructions.md e colocá-lo no diretório
+  .github do seu projeto.
+  Podemos também acessar o menu VS-CODE, Files > Preferences > Settings, na caixa
+   de texto digitar "instructions", será apresentada uma lista de arquivos de 
+   instruções.
+  Essas instrções serão executadas para toda solicitação ao agente de IA, isso consome
+  tokens.
+
+  O ideal seria criar instruções específicas para cada contexto de trabalho, desenvolvimento,
+  testes, qualidade, etc.
+  
+  Se você já tem uma boa estrutura de prompts em arquivos .MD no Copilot, você pode transformá-lo 
+  em skills, adicionando um cabeçalho de metadados e separando-os por casos de Uso
+  específicos, como uma skill focada apenas em refatoração de testes e outra focada
+  em CI/CD.
+  
+  Essas skills ficam no diretório:
+    .github/skills/<nome_da_skill>/SKILL.md
+
+  Você pode utilizar a própria IA para sugerir como criar os arquivos de skill.
+
+  Para criar esses arquivos de skill, criar a seguinte estrutura de diretórios:
+  .github
+  +--- skills
+    +--- dev-qa
+      -- SKILL.md
+
+  Para forçar a execução do arquivo do arquivo de skill no Chat da IA, devemos fazer
+  o seguinte: /dev-qa e descrever sua solicitação.

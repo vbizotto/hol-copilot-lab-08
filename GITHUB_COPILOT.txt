@@ -153,3 +153,22 @@ Definindo Instruções ao GitHub Copilot
 	- Nem tudo são flores, pois deixar instruções de testes com instruções de desenvolvimento do projeto, acarretará um consumo desnecessário
           de tokens.
           
+AGENTES
+=========================
+
+	- Agentes são uma nova forma de interagir com o GitHub Copilot, 
+	  permitindo que você delegue tarefas complexas e repetitivas para a IA.
+	- Eles podem ser configurados para executar ações específicas, como revisar código, gerar documentação 
+	  ou até mesmo gerenciar pull requests.
+	- Para criar um agente, você pode usar a interface do GitHub Copilot ou definir suas instruções em um 
+	  arquivo de configuração específico.
+	- Esses agentes podem ser personalizados para atender às necessidades do seu projeto, tornando o fluxo de 
+	  trabalho mais eficiente e produtivo. 
+	- Os agentes seguem a mesmas padronizações das Skills, mas com a diferença de que podem ser configurados para 
+	  executar tarefas específicas de forma autônoma.   
+	- Exemplo de instruções para um agente:
+		- Nome do agente: "Revisor de Código"
+		- Função: Revisar pull requests e fornecer feedback sobre qualidade do código, aderência a padrões e 
+		  sugestões de melhorias.
+		- Ações: Analisar diffs, identificar problemas de estilo, sugerir refatorações e gerar relatórios de 
+		  revisão.  
