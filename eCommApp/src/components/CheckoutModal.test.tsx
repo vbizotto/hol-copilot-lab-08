@@ -2,8 +2,9 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import CheckoutModal from './CheckoutModal';
 
-describe('CheckoutModal', () => {
-    it('shows the confirmation prompt and calls onConfirm when accepted', () => {
+describe('Modal de checkout', () => {
+    // Verifica a mensagem de confirmação e que aceitar chama somente a ação de confirmar.
+    it('exibe a confirmação e chama onConfirm quando o checkout é aceito', () => {
         const onConfirm = vi.fn();
         const onCancel = vi.fn();
 
@@ -17,7 +18,8 @@ describe('CheckoutModal', () => {
         expect(onCancel).not.toHaveBeenCalled();
     });
 
-    it('calls onCancel when the customer returns to the cart', () => {
+    // Verifica que retornar ao carrinho chama somente a ação de cancelar.
+    it('chama onCancel quando a pessoa retorna ao carrinho', () => {
         const onConfirm = vi.fn();
         const onCancel = vi.fn();
 
