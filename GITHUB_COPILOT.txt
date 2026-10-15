@@ -172,3 +172,7 @@ AGENTES
 		  sugestões de melhorias.
 		- Ações: Analisar diffs, identificar problemas de estilo, sugerir refatorações e gerar relatórios de 
 		  revisão.  
+	- O agente é uma Persona definida que executrá tarefas específicas, podendo ser configurado para interagir 
+	  com o repositório e fornecer insights valiosos para a equipe de desenvolvimento.	  
+	- Definição do caminho do arquivo de configuração do agente: .github/copilot-agents/revisor-de-codigo.md,
+	  onde "revisor-de-codigo" é o nome do agente.  
