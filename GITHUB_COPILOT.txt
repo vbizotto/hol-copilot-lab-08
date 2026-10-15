@@ -1,0 +1,155 @@
+GITHUB COPILOT
+--------------
+
+ - Maneiras de ativar o GITHUB COPILOT
+ - Diferenças entre as versões: 
+	. Gratuita
+	. Pro
+	. Business
+	. Enterprise
+	
+ - Baseado em OpenAI Codex, disponibilizado nas extensões:
+	. VS-Code
+	. Visual Studio
+	. VIM/Neovim
+	. Pacotes IDE JetBrains
+	
+ - Funções d autocompletar o código
+ - Gerar código através do CHAT, perguntas e respostas
+ - Realizar um resumo das alterações realizadas na abertura de um PULL
+ - Auxilia na revisão de código
+ 
+ Spaces do COPILOT
+ =================
+
+ Local dedicado a colaborar com a IA em um projeto. 
+ Os Espaços oferecem um ambiente rico em contexto, onde o Copilot retém o conhecimento do seu repositório e workflow.
+ 
+ 
+ Agente Copilot Cloud
+ ====================
+ 
+ Pode realizar uma série de codificações baseada em instruções pré-determinadas, gerar arquivos de documentações, construir um scaffoldind a partir de
+ uma série de especificações, ou seja, estruturas e recursos necessários à construção da aplicação de forma rápida.
+ 
+ Planos de Assinatura
+ ====================
+ 
+ Gratuito:
+	.Autocompletar código em editores compatíveis
+	.Número limitado de conclusões mensais e solicitações de bate-papo
+	.Acesso a modelos avançados de IA
+	
+ PRO:
+	.Limites de uso mais altos em comparação com o plano Gratuito
+	.Acesso prioritário aos modelos de IA mais recentes
+	.Sugestões e explicações de código avançado
+	.Integração com IDEs compatíveis (VS Code, Visual Studio, JetBrains, Neovim)
+	.Recursos de geração automática de testes e explicação de código
+	
+ 
+ PRO+:
+	.Todos os recursos do Pro
+	.Capacidade adicional de solicitação premium
+	.Acesso prioritário à infraestrutura
+ Business:
+	.Controles centralizados de gestão e políticas
+	.Filtragem de vulnerabilidades de segurança
+	.Referenciamento de código e filtragem de código público
+	.Indenização de propriedade intelectual e segurança, proteção e privacidade de nível empresarial
+	.Chat no IDE e em dispositivos móveis
+	.Filtrar por código público
+ 
+ Enterprise:
+	.Todas as funcionalidades de negócios
+	.Sugestões de código personalizadas com base em código interno/privado
+	.Integração com o GitHub Enterprise Cloud
+	.Busca e geração de documentação com inteligência artificial em toda a sua base de código
+	.Suporte aprimorado para solicitações de pull com tags e resumos baseados em IA
+	.Personalização e otimização de modelos Copilot em toda a organização
+	.Integração profunda com o GitHub para bate-papo e exploração do código-fonte.
+ 
+ INTERAGIR COM O COPILOT
+ =======================
+ 
+ - Sugestões embutidas:
+   Você digita o código e o Copilot fornece sugestões auto-completando o código,caso não queira aceitar a sugestão digitar <ESC>, para aceitar
+   <TAB> ou seta para a direita.
+   
+ - Paleta de comandos:
+	. Abrir VS-CODE selecionando CTRL+SHIT+P, digitar COPILOT e verifique os comandos disponíveis
+	. Selecione ações como explique isso ou gerar testes de unidade para obter assis
+	tência.
+	
+ CHAT do COPILOT
+ ===============
+ 
+	- Abra o painel do chat do Copilot e insira a seguinte questão: Como implementar uma pesquisa binária em Python ?
+ 
+	Uma das possíveis respostas:
+	
+	def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+ Chats embutidos
+ ===============
+
+ Na definição de um código ou documento, você pode inserir CTRL+I, para abrir um chat embutido para o código específico.
+ Podemos marcar/selecionar trechos de código no editor, digitarmos no chat os comandos de "/" como: 
+ /explain; 
+ /comment; 
+ /suggest; 
+ /tests
+ etc.
+ 
+ . Comentários de código podem virar código
+	- Depois de haver digitado o comentário a IA sugere comandos que produzam um código, segundo o comentário.
+ 
+ Explicações			
+ ===========
+ Entender a funcionalidade de um código é essencial, podemos marcar o trecho de código desejado e com o botão direito do mouse escolher a opção "explain"
+ e no chat será apresentado um texto com a explicação do código.
+ 
+ Geração de testes automatizados
+ ===============================
+ 
+ Os testes unitários garantem a funcionalidade e confiabilidade do código desenvolvido, economizando tempo e esforço.
+ Para a geração de testes basta informar no chat "Gerar testes unitários para o procedimento "xxxxxxxxxxxxxxxxxx".
+ Um código bem estruturado e comentado ajuda o Copilot a fornecer uma melhor ajuda e quanto mais interagimos com o Copilot melhor ele entenderá
+ suas atividades.
+ 
+Definindo Instruções ao GitHub Copilot
+======================================
+
+	- Após abrir seu projeto no VS-CODE, criar um arquivo copilot-instructions.md, que definirá instruções para a operação do Copilot.
+          Este arquivo deverá estar na pasta do projeto chamada: .GitHub.
+	  Estas instruções definirão o comportamento do Copilot no tratamento de suas ações/tarefas.
+
+	  Ex.:
+		Inicie cada resposta com "Certo ! Deixe-me ver isto..."
+		Termine cada questionamento com: "Se precisar de mais alguma coisa, estou aqui para ajudar!"
+
+		Cada vez que for gerar testes de unidade, ou fazer uma atualização de testes, utilize as regras descritas abaixo:
+		Analise os pontos abaixo e sugira melhorias se necessário.
+		- Nomes de testes claros e descritivos.
+		- Responsabilidade única para cada teste.
+		- Estrutura clara de "preparar-executar-verificar"(Arrange-act-assert).
+		- Apenas uma asserção por teste (quando apropriado).
+		- Uso adequado de Mocks/Stubs.
+		- Mensagens de erros claras.
+		- Configuração adequada de dados de testes.
+		- Tratamento de erros apropriados.
+		- Considerações sobre desempenho.
+		- Estrutura de testes de fácil manutenção.
+
+	- Nem tudo são flores, pois deixar instruções de testes com instruções de desenvolvimento do projeto, acarretará um consumo desnecessário
+          de tokens.
+          
