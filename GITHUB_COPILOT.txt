@@ -176,3 +176,8 @@ AGENTES
 	  com o repositório e fornecer insights valiosos para a equipe de desenvolvimento.	  
 	- Definição do caminho do arquivo de configuração do agente: .github/copilot-agents/revisor-de-codigo.md,
 	  onde "revisor-de-codigo" é o nome do agente.  
+	- O caminho dos procedimentos são definidos nos arquivos da Skills, que são arquivos de configuração que
+	  descrevem as habilidades e comportamentos do agente. Sendo este caminho: .github/copilot-skills/nome-da-skill.md, 
+	  onde "nome-da-skill" é o nome da habilidade específica que o agente deve executar. 
+	- O comando do prompt /create-skill é usado para criar uma nova habilidade (skill) para o agente, 
+	  permitindo que ele execute tarefas específicas de acordo com as instruções fornecidas.
