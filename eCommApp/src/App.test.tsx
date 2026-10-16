@@ -11,6 +11,7 @@ describe('App routes', () => {
     it.each([
         ['/', 'Welcome to the The Daily Harvest!'],
         ['/login', 'Admin Login'],
+        ['/register', 'Cadastrar usuário'],
         ['/admin', 'Welcome to the admin portal.'],
         ['/cart', 'Your Cart'],
     ])('renders the page registered for %s', (path, expectedText) => {

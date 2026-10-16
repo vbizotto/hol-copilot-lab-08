@@ -195,7 +195,7 @@ LAB7 - Utilizando Instruções Personalizadas para adaptar o comportamento do Co
   Podemos também acessar o menu VS-CODE, Files > Preferences > Settings, na caixa
    de texto digitar "instructions", será apresentada uma lista de arquivos de 
    instruções.
-  Essas instrções serão executadas para toda solicitação ao agente de IA, isso consome
+  Essas instruções serão executadas para toda solicitação ao agente de IA, isso consome
   tokens.
 
   O ideal seria criar instruções específicas para cada contexto de trabalho, desenvolvimento,
