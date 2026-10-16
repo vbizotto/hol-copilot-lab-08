@@ -18,6 +18,22 @@ describe('RegisterPage', () => {
         expect(screen.getByLabelText('Senha')).toBeRequired();
     });
 
+    it('blocks submission when the required fields are empty', async () => {
+        const user = userEvent.setup();
+
+        render(
+            <MemoryRouter>
+                <RegisterPage />
+            </MemoryRouter>
+        );
+
+        await user.click(screen.getByRole('button', { name: 'Cadastrar' }));
+
+        expect(screen.getByRole('textbox', { name: 'Usuário' })).toBeInvalid();
+        expect(screen.getByLabelText('Senha')).toBeInvalid();
+        expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    });
+
     it('does not claim to save an account before authentication is integrated', async () => {
         const user = userEvent.setup();
 
